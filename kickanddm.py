@@ -7,10 +7,8 @@ from pagermaid.utils import alias_command
 
 
 async def removemsg(context, last_name, count):
-    await log(f'开始删除【{last_name}】消息')
     count_buffer = 0
     target = await context.get_reply_message()
-    await log(f'获取目标完成')
     async for message in context.client.iter_messages(context.chat_id, from_user=target.from_id):
         if count_buffer == count:
             break
@@ -44,9 +42,7 @@ async def kickanddm(context):
                 await context.delete()
                 return False
             else:
-                await log(f'获取动作')
                 action = context.arguments.split()
-                await log(f'获取罪犯信息')
                 if reply.sender.last_name is None:
                     if reply.sender.first_name is None:
                         last_name = ''
@@ -56,7 +52,6 @@ async def kickanddm(context):
                     last_name = reply.sender.last_name
 
                 if len(action) == 1:
-                    await log(f'准备开始ban了他')
                     try:
                         await context.client.edit_permissions(context.chat_id, reply.sender.id,
                                                    timedelta(seconds=int(action[0].replace(' ', ''))),
@@ -74,7 +69,6 @@ async def kickanddm(context):
                         await context.delete()
                         return
                 else:
-                    await log(f'准备开始kick他')
                     try:
                         await context.client.edit_permissions(context.chat_id, reply.sender.id,
                                                    timedelta(seconds=60),
@@ -84,10 +78,8 @@ async def kickanddm(context):
                                                    send_inline=False, send_polls=False, invite_users=False,
                                                    change_info=False,
                                                    pin_messages=False)
-                        await log(f'先给他嘴堵住')
                         await context.edit(f'已将【{last_name}】这个b的嘴堵住了!\n正在清理存在痕迹...')
                         await removemsg(context, last_name, 999)
-                        await log(f'把他kick掉')
                         await context.client.edit_permissions(context.chat_id, reply.sender.id, view_messages=False)
                         await context.edit(f'已将【{last_name}】这个b飞了，江湖不见!')
                     except:
