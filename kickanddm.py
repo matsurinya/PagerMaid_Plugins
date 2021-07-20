@@ -18,7 +18,7 @@ async def removemsg(context, last_name, count):
     await context.edit(f'已删除【{last_name}】这个b最近{count_buffer}条污言秽语')
 
 
-@listener(is_plugin=True, outgoing=True, command=alias_command("k"),
+@listener(is_plugin=True, outgoing=True, command=alias_command("kickanddm"),
           description="回复你要删除消息和踢的人或者要禁言的人\n指令：\n-k直接删除消息并踢人\n-k 10禁言10秒（tg不支持60秒以下的时间，少于60变成永久）并删除最近999条消息\n⚠️k后面带时间的只是禁言，不带时间的直接踢")
 async def kickanddm(context):
     # 是否在群组
@@ -42,7 +42,7 @@ async def kickanddm(context):
                 await context.delete()
                 return False
             else:
-                action = context.arguments.split()
+                action = context.parameter
                 if reply.sender.last_name is None:
                     if reply.sender.first_name is None:
                         last_name = ''
@@ -88,15 +88,10 @@ async def kickanddm(context):
                         await context.delete()
                         return
         else:
-            notification = await bot.send_message(context.chat_id, '你好蠢诶，都没有回复人，我哪知道你要搞谁……', reply_to=context.id)
+            await context.edit('你好蠢诶，都没有回复人，我哪知道你要搞谁……')
             await sleep(5)
-            await notification.delete()
+            await context.delete()
     else:
-        notification = await bot.send_message(context.chat_id, '你好蠢诶，又不是群组，怎么搞人！', reply_to=context.id)
-        await sleep(5)
-        await notification.delete()
-    try:
+        await context.edit('你好蠢诶，又不是群组，怎么搞人！')
         await sleep(5)
         await context.delete()
-    except:
-        pass
