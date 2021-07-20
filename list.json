@@ -641,7 +641,7 @@
             "des": "自动复读（无引用）一个人的消息。命令：repeat 。"
         },
         {
-            "name": "kick&dm",
+            "name": "kickanddm",
             "version": "1.0",
             "section": "chat",
             "maintainer": "lowking",
