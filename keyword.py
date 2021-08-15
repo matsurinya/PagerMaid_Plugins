@@ -11,7 +11,6 @@ from pagermaid.utils import alias_command
 from telethon.errors.rpcerrorlist import StickersetInvalidError
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetID
-from random import randint
 
 msg_freq = 1
 group_last_time = {}
@@ -311,7 +310,7 @@ async def send_reply(chat_id, trigger, mode, reply_msg, context):
                             await log('贴纸配置错误。')
                             return
                         try:
-                            i = randint(0, len(sticker_idx) - 1)
+                            i = random.randint(0, len(sticker_idx) - 1)
                             message_list.append(await bot.send_file(
                                 chat_id,
                                 stickers.documents[int(sticker_idx[i])],
