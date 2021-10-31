@@ -64,7 +64,10 @@ async def main(context, sender_ids, forward_target):
                 isNeedDeal = True
                 resultMsg = make_reply_msg(context, target.text).strip()
                 if target.media is not None and not isinstance(target.media, MessageMediaWebPage):
-                    mediaType = target.media.document.mime_type.split('/')
+                    try:
+                        mediaType = target.media.document.mime_type.split('/')
+                    except:
+                        mediaType = []
                     if isinstance(target.media, MessageMediaPhoto):
                         await context.edit(f"{sourceCmd}识别到是图片，正在处理。。。")
                         # 图片类型
@@ -72,8 +75,6 @@ async def main(context, sender_ids, forward_target):
                         if resultMsg != "" and isSourceCmdNotEmpty:
                             photo = BytesIO()
                             photo.name = f"../forward-photo.png"
-                            if exists(photo.name):
-                                photo.name = f"../suffix-{photo.name}"
                             await context.edit(f"{sourceCmd}图片下载中。。。")
                             await bot.download_media(target.photo, photo)
                             with open(photo.name, "wb") as f:
@@ -96,7 +97,7 @@ async def main(context, sender_ids, forward_target):
                                     file.name = f"../{attr.file_name}"
                                     break
                                 except:
-                                    pass
+                                    file.name = f"picfile.png"
                             if exists(file.name):
                                 file.name = f"../suffix-{file.name}"
                             await context.edit(f"{sourceCmd}图片文件下载中。。。")
