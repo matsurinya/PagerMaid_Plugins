@@ -109,7 +109,7 @@ async def main(context, sender_ids, forward_target):
                             remove(file.name)
                         else:
                             isNeedDeal = False
-                    elif "webp" in mediaType or "x-tgsticker":
+                    elif "webp" in mediaType or "x-tgsticker" in mediaType:
                         # 贴纸
                         await context.edit(f"{sourceCmd}识别到贴纸，准备转发。。。")
                         isNeedDeal = False
