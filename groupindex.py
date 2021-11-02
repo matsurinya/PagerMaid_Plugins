@@ -12,7 +12,11 @@ async def group_index(context):
         await context.edit('请在群组中运行。')
         return
     # 获取群组信息
-    title = context.chat.title
+    try:
+        title = context.chat.title
+    except AttributeError:
+        await context.edit('读取群组信息失败。')
+        return
     end_id = context.id
     text = f'以下是群组 {title} 今日的活跃数据：\n'
 
@@ -82,6 +86,8 @@ async def group_index(context):
         for i in range(min(len(member_count), 5)):
             # 获取用户信息
             target_user = await context.client(GetFullUserRequest(member_count[i][0]))
-            first_name = target_user.user.first_name.replace("\u2060", "")
+            first_name = target_user.user.first_name
+            if first_name:
+                first_name = first_name.replace("\u2060", "")
             text += f'{first_name} `{member_count[i][1]}`\n'
     await context.edit(text)

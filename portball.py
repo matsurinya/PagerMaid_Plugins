@@ -1,4 +1,4 @@
-from pagermaid import bot, log
+from pagermaid import bot, log, user_id
 from pagermaid.listener import listener
 from telethon.errors import rpcerrorlist
 from asyncio import sleep
@@ -14,12 +14,30 @@ async def portball(context):
         reply = await context.get_reply_message()
         if reply:
             action = context.arguments.split()
-            if reply.sender.last_name is None:
-                last_name = ''
+            if reply.sender:
+                if reply.sender.last_name is None:
+                    last_name = ''
+                else:
+                    last_name = reply.sender.last_name
+                if reply.sender.id == user_id:
+                    await context.edit('无法禁言自己。')
+                    return
             else:
-                last_name = reply.sender.last_name
+                await context.edit('无法获取所回复的用户。')
+                return
 
             if len(action) < 2:
+                notification = await bot.send_message(context.chat_id, '格式是\n-portball 理由 秒数\n真蠢', reply_to=context.id)
+                await sleep(10)
+                await notification.delete()
+                try:
+                    await context.delete()
+                except:
+                    pass
+                return False
+            try:
+                int(action[1])
+            except ValueError:
                 notification = await bot.send_message(context.chat_id, '格式是\n-portball 理由 秒数\n真蠢', reply_to=context.id)
                 await sleep(10)
                 await notification.delete()

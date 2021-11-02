@@ -63,8 +63,12 @@ async def ars_getall(message: Message) -> None:
             sticker_pack_list = []
             await sleep(2)
     sendtext = '\n\n'.join(sticker_pack_list)
-    await message.client.send_message(message.chat_id, sendtext)
-    await message.delete()
+    try:
+        await message.client.send_message(message.chat_id, sendtext)
+        await message.delete()
+    except ValueError:
+        await message.client.send_message(message.chat_id, '您还没有添加贴纸包。')
+        await message.delete()
 
 
 async def ars_help(message: Message) -> None:
@@ -209,7 +213,10 @@ async def process_message(context):
     reply_user_id = 0
     link = process_link(context.chat_id, context.id)
     me = await context.client.get_me()
-    reply = await context.get_reply_message()
+    try:
+        reply = await context.get_reply_message()
+    except ValueError:
+        return
     try:
         reply_user_id = reply.sender.id
         if context.sticker:
