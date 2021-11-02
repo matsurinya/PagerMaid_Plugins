@@ -59,7 +59,7 @@ async def baidu(context):
 
 @listener(is_plugin=True, outgoing=True, command=alias_command("weather"),
           description="使用彩云天气 api 查询国内实时天气。",
-          parameters="<城市>")
+          parameters="<位置>")
 async def weather(context):
     await context.edit("获取中 . . .")
     try:
@@ -75,6 +75,28 @@ async def weather(context):
     await context.edit(weather_text)
 
 
+@listener(is_plugin=True, outgoing=True, command=alias_command("weather_pic"),
+          description="使用彩云天气 api 查询国内实时天气。",
+          parameters="<位置>")
+async def weather(context):
+    await context.edit("获取中 . . .")
+    reply = await context.get_reply_message()
+    try:
+        message = await obtain_message(context)
+    except ValueError:
+        await context.edit("出错了呜呜呜 ~ 无效的参数。")
+        return
+    async with bot.conversation('PagerMaid_Modify_bot') as conversation:
+        await conversation.send_message('/weather ' + message)
+        chat_response = await conversation.get_response()
+        await bot.send_read_acknowledge(conversation.chat_id)
+    if reply:
+        await context.respond(chat_response, reply_to=reply)
+    else:
+        await context.respond(chat_response)
+    await context.delete()
+
+
 @listener(is_plugin=True, outgoing=True, command=alias_command("pixiv"),
           description="查询插画信息 （或者回复一条消息）。使用 set [num] 更改镜像源，序号 2 为官方源， 3 为凯露自建源。异步下载需要依赖库 "
                       "aiohttp[speedups] 、 aiofiles",
@@ -83,7 +105,7 @@ async def pixiv(context):
     await context.edit("获取中 . . .")
     if len(context.parameter) == 2:
         if context.parameter[0] == 'set':
-            if not redis_status:
+            if not redis_status():
                 await context.edit('redis 数据库离线 无法更改镜像源。')
                 return
             else:
@@ -105,7 +127,7 @@ async def pixiv(context):
                     return
         else:
             pass
-    if not redis_status:
+    if not redis_status():
         num = 3
     else:
         try:

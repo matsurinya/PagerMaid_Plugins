@@ -12,7 +12,7 @@
         },
         {
             "name": "dme",
-            "version": "1.12",
+            "version": "1.122",
             "section": "chat",
             "maintainer": "xtaodada",
             "size": "4.3 kb",
@@ -22,7 +22,7 @@
         },
         {
             "name": "autochangename",
-            "version": "1.011",
+            "version": "1.11",
             "section": "profile",
             "maintainer": "xtaodada",
             "size": "2.1 kb",
@@ -32,7 +32,7 @@
         },
         {
             "name": "autorm",
-            "version": "1.02",
+            "version": "1.031",
             "section": "chat",
             "maintainer": "fruitymelon",
             "size": "6.7 kb",
@@ -62,17 +62,17 @@
         },
         {
             "name": "xtao-some",
-            "version": "1.203",
+            "version": "1.22",
             "section": "daily",
             "maintainer": "xtaodada",
-            "size": "18.8 kb",
+            "size": "12.9 kb",
             "supported": true,
             "des-short": "一大堆便民功能。",
-            "des": "超多功能 例如 -ip -ipping -guess -getdel -get_bots 等。"
+            "des": "超多功能 例如 -ip -ipping -guess -getdel -get_bots -wiki 等。"
         },
         {
             "name": "yb-dl",
-            "version": "1.02",
+            "version": "1.03",
             "section": "daily",
             "maintainer": "xtaodada",
             "size": "18.8 kb",
@@ -82,7 +82,7 @@
         },
         {
             "name": "throwit",
-            "version": "1.612",
+            "version": "1.62",
             "section": "profile",
             "maintainer": "xtaodada",
             "size": "6.9 kb",
@@ -122,7 +122,7 @@
         },
         {
             "name": "denyu",
-            "version": "1.11",
+            "version": "1.111",
             "section": "chat",
             "maintainer": "fruitymelon",
             "size": "2.7 kb",
@@ -152,7 +152,7 @@
         },
         {
             "name": "portball",
-            "version": "1.44",
+            "version": "1.452",
             "section": "chat",
             "maintainer": "Pentacene",
             "size": "2.8 kb",
@@ -192,7 +192,7 @@
         },
         {
             "name": "whois",
-            "version": "1.131",
+            "version": "1.14",
             "section": "daily",
             "maintainer": "KorenKrita",
             "size": "1.1 kb",
@@ -202,7 +202,7 @@
         },
         {
             "name": "eat",
-            "version": "1.03",
+            "version": "1.031",
             "section": "profile",
             "maintainer": "SF_PICK",
             "size": "6.4 kb",
@@ -242,7 +242,7 @@
         },
         {
             "name": "da",
-            "version": "1.01",
+            "version": "1.021",
             "section": "chat",
             "maintainer": "yxkumad",
             "size": "1.6 kb",
@@ -272,7 +272,7 @@
         },
         {
             "name": "neteaseshuffle",
-            "version": "1.11",
+            "version": "1.111",
             "section": "daily",
             "maintainer": "TNTcraftHIM",
             "size": "3.0 kb",
@@ -312,7 +312,7 @@
         },
         {
             "name": "videodl",
-            "version": "0.12",
+            "version": "0.121",
             "section": "daily",
             "maintainer": "TNTcraftHIM",
             "size": "5.3 kb",
@@ -332,7 +332,7 @@
         },
         {
             "name": "stickertopic",
-            "version": "1.111",
+            "version": "1.12",
             "section": "chat",
             "maintainer": "TNTcraftHIM",
             "size": "3.5 kb",
@@ -342,13 +342,13 @@
         },
         {
             "name": "vip",
-            "version": "0.51",
+            "version": "0.61",
             "section": "chat",
             "maintainer": "xtaodada",
-            "size": "4.0 kb",
+            "size": "9.8 kb",
             "supported": true,
             "des-short": "vip 捐赠用户功能",
-            "des": "命令：天气：weather Pixiv：pixiv \n百度：baidu Duckduckgo：duckduckgo\n相似动漫：whatanime。与 weather 插件冲突"
+            "des": "命令：天气：weather weather_pic \nPixiv：pixiv \n百度：baidu Duckduckgo：duckduckgo\n相似动漫：whatanime。与 weather 插件冲突"
         },
         {
             "name": "calculator",
@@ -372,7 +372,7 @@
         },
         {
             "name": "autoreplysticker",
-            "version": "1.23",
+            "version": "1.232",
             "section": "chat",
             "maintainer": "Pentacene",
             "size": "12 kb",
@@ -392,7 +392,7 @@
         },
         {
             "name": "keyword",
-            "version": "2.6341",
+            "version": "2.7",
             "section": "chat",
             "maintainer": "c3b2a,xtaodada",
             "size": "44.1 kb",
@@ -482,7 +482,7 @@
         },
         {
             "name": "pl",
-            "version": "1.02",
+            "version": "1.03",
             "section": "chat",
             "maintainer": "lowking",
             "size": "4.0 kb",
@@ -502,7 +502,7 @@
         },
         {
             "name": "fuck",
-            "version": "1.02",
+            "version": "1.022",
             "section": "chat",
             "maintainer": "Pentacene",
             "size": "4.0 kb",
@@ -532,7 +532,7 @@
         },
         {
             "name": "getstickers",
-            "version": "1.1",
+            "version": "1.11",
             "section": "chat",
             "maintainer": "xtaodada,Vesugierii",
             "size": "5.4 kb",
@@ -552,7 +552,7 @@
         },
         {
             "name": "pic2sticker",
-            "version": "1.0",
+            "version": "1.01",
             "section": "chat",
             "maintainer": "xtaodada",
             "size": "4.7 kb",
@@ -572,7 +572,7 @@
         },
         {
             "name": "fuckadmin",
-            "version": "1.1",
+            "version": "1.11",
             "section": "daily",
             "maintainer": "xtaodada",
             "size": "2.9 kb",
@@ -582,7 +582,7 @@
         },
         {
             "name": "bin",
-            "version": "1.01",
+            "version": "1.02",
             "section": "daily",
             "maintainer": "paulkm",
             "size": "1.8 kb",
@@ -592,7 +592,7 @@
         },
         {
             "name": "fuckmember",
-            "version": "1.031",
+            "version": "1.033",
             "section": "daily",
             "maintainer": "xtaodada",
             "size": "3.0 kb",
@@ -612,7 +612,7 @@
         },
         {
             "name": "forcesubscribe",
-            "version": "1.05",
+            "version": "1.06",
             "section": "daily",
             "maintainer": "xtaodada",
             "size": "4.2 kb",
@@ -622,7 +622,7 @@
         },
         {
             "name": "forcegroup",
-            "version": "1.01",
+            "version": "1.02",
             "section": "daily",
             "maintainer": "xtaodada",
             "size": "3.6 kb",
@@ -649,6 +649,136 @@
             "supported": true,
             "des-short": "删除某人的消息并踢出/禁言",
             "des": "回复你要删除消息和踢的人或者要禁言的人\n指令：\n-kickanddm 直接删除消息并踢人\n-kickanddm 100 禁言100秒（tg不支持60秒以下的时间，少于60变成永久）并删除最近999条消息\n⚠️kickanddm 后面带时间的只是禁言，不带时间的直接踢。"
+        },
+        {
+            "name": "fuckmessage",
+            "version": "1.01",
+            "section": "chat",
+            "maintainer": "xtaodada",
+            "size": "1.3 kb",
+            "supported": true,
+            "des-short": "删除烦人的消息",
+            "des": "删除最近 200 条消息中包含指定关键字的消息。"
+        },
+        {
+            "name": "yyr",
+            "version": "1.0",
+            "section": "chat",
+            "maintainer": "xtaodada、kld",
+            "size": "0.9 kb",
+            "supported": true,
+            "des-short": "抽象话转换",
+            "des": "把普通的话转换成抽象话"
+        },
+        {
+            "name": "chatbot",
+            "version": "1.0",
+            "section": "chat",
+            "maintainer": "xtaodada",
+            "size": "1.2 kb",
+            "supported": true,
+            "des-short": "智能聊天机器人。（支持回复）",
+            "des": "使用自然语言处理 (NLP) 来帮助用户通过文本进行交互。（支持回复）。\n指令：-chatbot"
+        },
+        {
+            "name": "square",
+            "version": "1.0",
+            "section": "chat",
+            "maintainer": "Vesugierii",
+            "size": "1.2 kb",
+            "supported": true,
+            "des-short": "生成文本矩形",
+            "des": "指令：-square"
+        },
+        {
+            "name": "groupindex",
+            "version": "1.121",
+            "section": "daily",
+            "maintainer": "xtaodada",
+            "size": "3.2 kb",
+            "supported": true,
+            "des-short": "获取群组当日活跃数据",
+            "des": "获取群组当日活跃数据。\n指令：-groupindex"
+        },
+        {
+            "name": "yvlu",
+            "version": "1.121",
+            "section": "chat",
+            "maintainer": "xtaodada",
+            "size": "4.8 kb",
+            "supported": true,
+            "des-short": "将回复的消息转换成语录图片",
+            "des": "将回复的消息转换成语录图片。\n指令：-yvlu"
+        },
+        {
+            "name": "antichannelpin",
+            "version": "1.0",
+            "section": "chat",
+            "maintainer": "xtaodada",
+            "size": "2.8 kb",
+            "supported": true,
+            "des-short": "自动取消关联频道消息置顶",
+            "des": "自动取消关联频道消息置顶。\n指令：-antichannelpin"
+        },
+        {
+            "name": "shift",
+            "version": "1.03",
+            "section": "daily",
+            "maintainer": "xtaodada",
+            "size": "5.3 kb",
+            "supported": true,
+            "des-short": "自动转发/备份频道消息",
+            "des": "自动转发频道新消息或者从零开始备份频道。\n指令：-shift\n查看帮助：-help shift"
+        },
+        {
+            "name": "getstickerset",
+            "version": "1.01",
+            "section": "chat",
+            "maintainer": "xtaodada",
+            "size": "4.4 kb",
+            "supported": true,
+            "des-short": "获取所回复贴纸的贴纸包信息",
+            "des": "获取所回复贴纸的贴纸包信息。\n指令：-getstickerset"
+        },
+        {
+            "name": "autodel",
+            "version": "1.0",
+            "section": "chat",
+            "maintainer": "xtaodada",
+            "size": "5.7 kb",
+            "supported": true,
+            "des-short": "在指定的时间后删除他人的消息。",
+            "des": "在指定的时间后删除所回复用户发送的消息。\n指令：-autodel"
+        },
+        {
+            "name": "antisticker",
+            "version": "1.02",
+            "section": "chat",
+            "maintainer": "xtaodada",
+            "size": "0.7 kb",
+            "supported": true,
+            "des-short": "在贴纸被回复时自动删除贴纸防止被偷取",
+            "des": "在贴纸被回复时自动删除贴纸防止被偷取。\n网速争霸 不保证成功率"
+        },
+        {
+            "name": "yinglish",
+            "version": "1.00",
+            "section": "chat",
+            "maintainer": "YU",
+            "size": "1.7 kb",
+            "supported": true,
+            "des-short": "能把中文翻译成淫语的翻译机",
+            "des": "能把中文自动翻译成淫语的翻译机\n 需要 pypi 前置 jieba \n 灵感来自于https://github.com/RimoChan/yinglish \n指令：-yinglish"
+        },
+        {
+            "name": "findmessage",
+            "version": "1.00",
+            "section": "chat",
+            "maintainer": "vesugier",
+            "size": "1.44 kb",
+            "supported": true,
+            "des-short": "搜索消息插件",
+            "des": "查找最近50条消息中包含指定关键字的消息，并推送相应链接人名及信息至Log频道。\n指令：-findmessage"
         }
     ]
 }

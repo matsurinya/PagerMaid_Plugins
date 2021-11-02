@@ -11,7 +11,6 @@ from pagermaid.utils import alias_command
 from telethon.errors.rpcerrorlist import StickersetInvalidError
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetID
-from random import randint
 
 msg_freq = 1
 group_last_time = {}
@@ -311,7 +310,7 @@ async def send_reply(chat_id, trigger, mode, reply_msg, context):
                             await log('贴纸配置错误。')
                             return
                         try:
-                            i = randint(0, len(sticker_idx) - 1)
+                            i = random.randint(0, len(sticker_idx) - 1)
                             message_list.append(await bot.send_file(
                                 chat_id,
                                 stickers.documents[int(sticker_idx[i])],
@@ -474,7 +473,7 @@ async def reply(context):
             parse.append(tmp_parse[i])
     if len(parse) == 0 or (
             len(parse[0].split()) == 1 and parse[0].split()[0] in ("new", "del", "delid", "clear")) or len(
-        parse[0].split()) > 2:
+            parse[0].split()) > 2:
         await context.edit(
             "[Code: -1] 格式错误，格式为 `-keyword` 加上 `new <plain|regex> '<规则>' '<回复信息>'` 或者 "
             "`del <plain|regex> '<规则>'` 或者 `list` 或者 `clear <plain|regex>`")
@@ -491,8 +490,8 @@ async def reply(context):
             redis.set(f"keyword.{chat_id}.regex", save_rules(regex_dict, placeholder))
         else:
             await context.edit(
-                "[Code: -1] 格式错误，格式为 `-keyword` 加上 `new <plain|regex> '<规则>' '<回复信息>'` 或者 "
-                "`del <plain|regex> '<规则>'` 或者 `list` 或者 `clear <plain|regex>`")
+            "[Code: -1] 格式错误，格式为 `-keyword` 加上 `new <plain|regex> '<规则>' '<回复信息>'` 或者 "
+            "`del <plain|regex> '<规则>'` 或者 `list` 或者 `clear <plain|regex>`")
             await del_msg(context, 10)
             return
         await context.edit("设置成功")
@@ -522,8 +521,8 @@ async def reply(context):
                 return
         else:
             await context.edit(
-                "[Code: -1] 格式错误，格式为 `-keyword` 加上 `new <plain|regex> '<规则>' '<回复信息>'` 或者 "
-                "`del <plain|regex> '<规则>'` 或者 `list` 或者 `clear <plain|regex>`")
+            "[Code: -1] 格式错误，格式为 `-keyword` 加上 `new <plain|regex> '<规则>' '<回复信息>'` 或者 "
+            "`del <plain|regex> '<规则>'` 或者 `list` 或者 `clear <plain|regex>`")
             await del_msg(context, 10)
             return
         await context.edit("删除成功")
@@ -935,7 +934,7 @@ async def funcset(context):
                 func_online = \
                     json.loads(
                         requests.get("https://raw.githubusercontent.com/xtaodada/PagerMaid_Plugins/master"
-                                     "/keyword_func/list.json").content)["list"]
+                                    "/keyword_func/list.json").content)["list"]
                 if func_name in func_online:
                     func_directory = f"data/keyword_func/"
                     file_path = func_name + ".py"

@@ -71,6 +71,8 @@ async def remove_message(context):
             if text.startswith("-autorm"):
                 context.arguments = text.lstrip("-autorm").lstrip()
                 await autorm(context)
+            if text.startswith(f"-{alias_command('dme')}"):
+                return
             await asyncio.sleep(delta)
             await context.delete()
             return
@@ -79,11 +81,16 @@ async def remove_message(context):
             if text.startswith("-autorm"):
                 context.arguments = text.lstrip("-autorm").lstrip()
                 await autorm(context)
+            if text.startswith(f"-{alias_command('dme')}"):
+                return
             await asyncio.sleep(delta)
             await context.delete()
             return
     except Exception as e:
-        await sendmsg(context, await context.get_chat(), str(e))
+        try:
+            await sendmsg(context, await context.get_chat(), str(e))
+        except ValueError:
+            pass
 
 
 @listener(is_plugin=True, outgoing=True, command=alias_command("autorm"),
