@@ -19,8 +19,9 @@ positions = {
     "3": [127, 105],
     "4": [76, 325],
     "5": [256, 160],
+    "6": [298, 22],
 }
-max_number = 5
+max_number = len(positions)
 
 
 def eat_it(base, mask, photo, number):
@@ -41,7 +42,7 @@ def eat_it(base, mask, photo, number):
 
 
 @listener(is_plugin=True, outgoing=True, command=alias_command("eat"),
-          description="生成一张 吃头像 图片，（可选：当第二个参数存在时，旋转用户头像 180°）",
+          description="生成一张 吃头像 图片，（可选：当第二个参数是数字时，读取预存的配置；当第二个参数是r时，头像旋转180°）",
           parameters="<username/uid> [随意内容]")
 async def eat(context):
     if len(context.parameter) > 2:
@@ -105,13 +106,28 @@ async def eat(context):
                 with open('plugins/eat/mask' + str(num) + '.png', 'wb') as ms:
                     ms.write(re.content)
         number = randint(1, max_number)
+        try:
+            if len(context.parameter) == 1:
+                p1 = context.parameter[0]
+                if p1[0] == "r":
+                    diu_round = True
+                    try:
+                        if len(p1) > 1:
+                            number = "".join(p1[1:])
+                    except:
+                        number = randint(1, max_number)
+                else:
+                    number = p1
+                number = int(number)
+        except:
+            number = randint(1, max_number)
         markImg = Image.open("plugins/eat/" + str(target_user.user.id) + ".jpg")
         eatImg = Image.open("plugins/eat/eat" + str(number) + ".png")
         maskImg = Image.open("plugins/eat/mask" + str(number) + ".png")
-        if len(context.parameter) == 2:
-            diu_round = True
+
         if diu_round:
             markImg = markImg.rotate(180)  # 对图片进行旋转
+        await context.edit(f"{number}-{type(number)}")
         result = eat_it(eatImg, maskImg, markImg, number)
         result.save('plugins/eat/eat.webp')
         target_file = await context.client.upload_file("plugins/eat/eat.webp")
