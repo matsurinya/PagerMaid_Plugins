@@ -11,6 +11,7 @@ from telethon.errors.rpcerrorlist import ChatSendStickersForbiddenError
 from struct import error as StructError
 from pagermaid.listener import listener
 from pagermaid.utils import alias_command
+from pagermaid import redis
 
 
 positions = {
@@ -109,16 +110,24 @@ async def eat(context):
         try:
             if len(context.parameter) == 1:
                 p1 = context.parameter[0]
+                p2 = "".join(p1[1:])
                 if p1[0] == "r":
                     diu_round = True
                     try:
                         if len(p1) > 1:
-                            number = "".join(p1[1:])
+                            number = p2
                     except:
                         number = randint(1, max_number)
+                elif p1[0] == "d":
+                    redis.set("eat.default-config", p2)
+                    await context.edit(f"已经设置默认配置为：{p2}")
+                    return
                 else:
                     number = p1
                 number = int(number)
+            defaultConfig = redis.get("eat.default-config")
+            if defaultConfig:
+                number = int(defaultConfig)
         except:
             number = randint(1, max_number)
         markImg = Image.open("plugins/eat/" + str(target_user.user.id) + ".jpg")
