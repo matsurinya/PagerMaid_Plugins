@@ -127,7 +127,6 @@ async def eat(context):
 
         if diu_round:
             markImg = markImg.rotate(180)  # 对图片进行旋转
-        await context.edit(f"{number}-{type(number)}")
         result = eat_it(eatImg, maskImg, markImg, number)
         result.save('plugins/eat/eat.webp')
         target_file = await context.client.upload_file("plugins/eat/eat.webp")
