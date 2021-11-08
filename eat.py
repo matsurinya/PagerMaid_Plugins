@@ -42,7 +42,7 @@ def eat_it(base, mask, photo, number):
 
 
 @listener(is_plugin=True, outgoing=True, command=alias_command("eat"),
-          description="生成一张 吃头像 图片，（可选：当第二个参数是数字时，读取预存的配置；当第二个参数是r时，头像旋转180°）",
+          description="生成一张 吃头像 图片，（可选：当第二个参数是数字时，读取预存的配置；当第二个参数是r开头时，头像旋转180°，并且判断r后面是数字则读取对应的配置生成）",
           parameters="<username/uid> [随意内容]")
 async def eat(context):
     if len(context.parameter) > 2:
