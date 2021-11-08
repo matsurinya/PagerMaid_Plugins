@@ -11,6 +11,7 @@ from telethon.errors.rpcerrorlist import ChatSendStickersForbiddenError
 from struct import error as StructError
 from pagermaid.listener import listener
 from pagermaid.utils import alias_command
+from pagermaid import redis
 
 
 positions = {
@@ -49,7 +50,6 @@ async def eat(context):
         await context.edit("出错了呜呜呜 ~ 无效的参数。")
         return
     diu_round = False
-    await context.edit("正在生成 吃头像 图片中 . . .")
     if context.reply_to_msg_id:
         reply_message = await context.get_reply_message()
         try:
@@ -109,18 +109,32 @@ async def eat(context):
         try:
             if len(context.parameter) == 1:
                 p1 = context.parameter[0]
+                p2 = "".join(p1[1:])
                 if p1[0] == "r":
                     diu_round = True
                     try:
                         if len(p1) > 1:
-                            number = "".join(p1[1:])
+                            number = p2
                     except:
                         number = randint(1, max_number)
+                elif p1[0] == "d":
+                    if p2:
+                        redis.set("eat.default-config", p2)
+                        await context.edit(f"已经设置默认配置为：{p2}")
+                    else:
+                        redis.delete("eat.default-config")
+                        await context.edit(f"已经清空默认配置")
+
+                    return
                 else:
                     number = p1
                 number = int(number)
+            defaultConfig = redis.get("eat.default-config")
+            if defaultConfig:
+                number = int(defaultConfig)
         except:
             number = randint(1, max_number)
+        await context.edit("正在生成 吃头像 图片中 . . .")
         markImg = Image.open("plugins/eat/" + str(target_user.user.id) + ".jpg")
         eatImg = Image.open("plugins/eat/eat" + str(number) + ".png")
         maskImg = Image.open("plugins/eat/mask" + str(number) + ".png")
