@@ -22,6 +22,9 @@ positions = {
     "5": [256, 160],
     "6": [298, 22],
 }
+notifyStrArr = {
+    "6": "踢人",
+}
 max_number = len(positions)
 
 
@@ -58,8 +61,6 @@ async def eat(context):
             await context.edit("出错了呜呜呜 ~ 无效的参数。")
             return
         target_user = await context.client(GetFullUserRequest(user_id))
-        if len(context.parameter) == 1:
-            diu_round = True
     else:
         if len(context.parameter) == 1 or len(context.parameter) == 2:
             user = context.parameter[0]
@@ -107,34 +108,39 @@ async def eat(context):
                     ms.write(re.content)
         number = randint(1, max_number)
         try:
+            p1 = 0
+            p2 = 0
             if len(context.parameter) == 1:
                 p1 = context.parameter[0]
-                p2 = "".join(p1[1:])
                 if p1[0] == "r":
                     diu_round = True
-                    try:
-                        if len(p1) > 1:
-                            number = p2
-                    except:
-                        number = randint(1, max_number)
+                    if len(p1) > 1:
+                        p2 = int("".join(p1[1:]))
+                        number = p2
                 elif p1[0] == "d":
+                    if len(p1) > 1:
+                        p2 = int("".join(p1[1:]))
                     if p2:
                         redis.set("eat.default-config", p2)
                         await context.edit(f"已经设置默认配置为：{p2}")
                     else:
                         redis.delete("eat.default-config")
                         await context.edit(f"已经清空默认配置")
-
                     return
-                else:
-                    number = p1
-                number = int(number)
             defaultConfig = redis.get("eat.default-config")
-            if defaultConfig:
+            if p2 > 0:
+                number = p2
+            elif not diu_round and int(p1) > 0:
+                number = int(p1)
+            elif defaultConfig:
                 number = int(defaultConfig)
         except:
             number = randint(1, max_number)
-        await context.edit("正在生成 吃头像 图片中 . . .")
+        try:
+            notifyStr = notifyStrArr[str(number)]
+        except:
+            notifyStr = "吃头像"
+        await context.edit(f"正在生成 {notifyStr} 图片中 . . .")
         markImg = Image.open("plugins/eat/" + str(target_user.user.id) + ".jpg")
         eatImg = Image.open("plugins/eat/eat" + str(number) + ".png")
         maskImg = Image.open("plugins/eat/mask" + str(number) + ".png")
