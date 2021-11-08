@@ -11,9 +11,13 @@ from telethon.errors.rpcerrorlist import ChatSendStickersForbiddenError
 from struct import error as StructError
 from pagermaid.listener import listener
 from pagermaid.utils import alias_command
-from pagermaid import redis
+from pagermaid import redis, config
 
 
+try:
+    git_source = config['git_source']
+except:
+    git_source = "https://raw.githubusercontent.com/Xtao-Labs/PagerMaid_Plugins/master/"
 positions = {
     "1": [297, 288],
     "2": [85, 368],
@@ -99,11 +103,11 @@ async def eat(context):
         for num in range(1, max_number + 1):
             print(num)
             if not exists('plugins/eat/eat' + str(num) + '.png'):
-                re = get('https://raw.githubusercontent.com/FlowerSilent/Photo/master/photo/eat' + str(num) + '.png')
+                re = get(f'{git_source}eat/eat' + str(num) + '.png')
                 with open('plugins/eat/eat' + str(num) + '.png', 'wb') as bg:
                     bg.write(re.content)
             if not exists('plugins/eat/mask' + str(num) + '.png'):
-                re = get('https://raw.githubusercontent.com/FlowerSilent/Photo/master/photo/mask' + str(num) + '.png')
+                re = get(f'{git_source}eat/mask' + str(num) + '.png')
                 with open('plugins/eat/mask' + str(num) + '.png', 'wb') as ms:
                     ms.write(re.content)
         number = randint(1, max_number)
