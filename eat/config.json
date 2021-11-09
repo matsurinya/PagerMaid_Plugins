@@ -3,10 +3,13 @@
     "ri": [64, 87],
     "zou": [171, 328, "zou1"],
     "zou1": [444, 339]
+    "ada": [223, 314, "ada1"],
+    "ada1": [283, 146]
   },
   "notifies": {
     "ri": "日一下",
-    "zou": "揍你哦"
+    "zou": "揍你哦",
+    "ada": "给爷死"
   },
   "needDownloadFileList": [
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatzou.png",
