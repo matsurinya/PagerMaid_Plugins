@@ -14,6 +14,7 @@ from pagermaid.utils import alias_command
 from pagermaid import redis, config
 from collections import defaultdict
 import json
+import asyncio
 
 
 try:
@@ -36,8 +37,7 @@ configFilePath = 'plugins/eat/config.json'
 configFileRemoteUrlKey = "eat.configFileRemoteUrl"
 
 
-
-def eat_it(base, mask, photo, number):
+async def eat_it(context, base, mask, photo, number, layer = 0):
     mask_size = mask.size
     photo_size = photo.size
     if mask_size[0] < photo_size[0] and mask_size[1] < photo_size[1]:
@@ -46,11 +46,30 @@ def eat_it(base, mask, photo, number):
     photo = photo.crop((0, 0, mask_size[0], mask_size[1]))
     mask1 = Image.new('RGBA', mask_size)
     mask1.paste(photo, mask=mask)
-    base.paste(mask1, (positions[str(number)][0], positions[str(number)][1]), mask1)
+    numberPosition = positions[str(number)]
+    base.paste(mask1, (numberPosition[0], numberPosition[1]), mask1)
+
+    # 增加判断是否有第二个头像孔
+    isContinue = len(numberPosition) > 2 and layer == 0
+    if isContinue:
+        await context.client.download_profile_photo(
+            from_user.user.id,
+            "plugins/eat/" + str(from_user.user.id) + ".jpg",
+            download_big=True
+        )
+        try:
+            markImg = Image.open("plugins/eat/" + str(from_user.user.id) + ".jpg")
+            maskImg = Image.open("plugins/eat/mask" + str(numberPosition[2]) + ".png")
+        except:
+            await context.edit(f"图片模版加载出错，请检查并更新配置：mask{str(numberPosition[2])}.png")
+            return base
+        base = await eat_it(context, base, maskImg, markImg, numberPosition[2], layer+1)
+
     temp = base.size[0] if base.size[0] > base.size[1] else base.size[1]
     if temp != 512:
         scale = 512 / temp
         base = base.resize((int(base.size[0] * scale), int(base.size[1] * scale)), Image.LANCZOS)
+
     return base
 
 
@@ -130,6 +149,9 @@ async def eat(context):
         await context.edit("出错了呜呜呜 ~ 无效的参数。")
         return
     diu_round = False
+    user_object = await context.client.get_me()
+    global from_user
+    from_user = await context.client(GetFullUserRequest(user_object.id))
     if context.reply_to_msg_id:
         reply_message = await context.get_reply_message()
         try:
@@ -144,7 +166,6 @@ async def eat(context):
             if user.isnumeric():
                 user = int(user)
         else:
-            user_object = await context.client.get_me()
             user = user_object.id
         if context.message.entities is not None:
             if isinstance(context.message.entities[0], MessageEntityMentionName):
@@ -212,7 +233,8 @@ async def eat(context):
                         redis.delete("eat.default-config")
                         await context.edit(f"已经清空默认配置")
                     return
-                elif p1[0] == "s":
+                elif p1[0] == "c":
+                    await context.edit(f"正在更新远程配置文件")
                     if len(p1) > 1:
                         # 获取参数中的url
                         p2 = "".join(p1[1:])
@@ -232,7 +254,6 @@ async def eat(context):
                                 return
                             else:
                                 await context.edit(f"下载并加载配置文件成功")
-
                     else:
                         # 没传url直接更新
                         if await updateConfig(configFilePath, context) != 0:
@@ -241,18 +262,19 @@ async def eat(context):
                         else:
                             await context.edit(f"从远程更新配置文件成功")
                     return
-            defaultConfig = redis.get("eat.default-config").decode()
+            defaultConfig = redis.get("eat.default-config")
             if isinstance(p2, str):
                 number = p2
             elif isinstance(p2, int) and p2 > 0:
                 number = int(p2)
-            elif not diu_round and int(p1) > 0:
+            elif not diu_round and ((isinstance(p1, int) and int(p1) > 0) or isinstance(p1, str)):
                 try:
                     number = int(p1)
                 except:
                     number = p1
             elif defaultConfig:
                 try:
+                    defaultConfig = defaultConfig.decode()
                     number = int(defaultConfig)
                 except:
                     number = str(defaultConfig)
@@ -269,19 +291,29 @@ async def eat(context):
             notifyStr = notifyStrArr[str(number)]
         except:
             notifyStr = "吃头像"
-        await context.edit(f"正在生成 {notifyStr} 图片中 . . .{number}-{notifyStrArr}")
+        await context.edit(f"正在生成 {notifyStr} 图片中 . . .")
         markImg = Image.open("plugins/eat/" + str(target_user.user.id) + ".jpg")
-        eatImg = Image.open("plugins/eat/eat" + str(number) + ".png")
-        maskImg = Image.open("plugins/eat/mask" + str(number) + ".png")
+        try:
+            eatImg = Image.open("plugins/eat/eat" + str(number) + ".png")
+            maskImg = Image.open("plugins/eat/mask" + str(number) + ".png")
+        except:
+            await context.edit(f"图片模版加载出错，请检查并更新配置：{str(number)}")
+            return
 
         if diu_round:
             markImg = markImg.rotate(180)  # 对图片进行旋转
-        result = eat_it(eatImg, maskImg, markImg, number)
+        try:
+            number = str(number)
+        except:
+            pass
+        result = await eat_it(context, eatImg, maskImg, markImg, number)
         result.save('plugins/eat/eat.webp')
         target_file = await context.client.upload_file("plugins/eat/eat.webp")
         try:
             remove("plugins/eat/" + str(target_user.user.id) + ".jpg")
             remove("plugins/eat/" + str(target_user.user.id) + ".png")
+            remove("plugins/eat/" + str(from_user.user.id) + ".jpg")
+            remove("plugins/eat/" + str(from_user.user.id) + ".png")
             remove("plugins/eat/eat.webp")
             remove(photo)
         except:
