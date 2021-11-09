@@ -1,0 +1,12 @@
+{
+  "positions": {
+    "ri": [64, 87]
+  },
+  "notifies": {
+    "ri": "日一下"
+  },
+  "needDownloadFileList": [
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatri.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskri.png"
+  ]
+}
