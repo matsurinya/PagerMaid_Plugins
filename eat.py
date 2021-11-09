@@ -12,6 +12,8 @@ from struct import error as StructError
 from pagermaid.listener import listener
 from pagermaid.utils import alias_command
 from pagermaid import redis, config
+from collections import defaultdict
+import json
 
 
 try:
@@ -30,6 +32,9 @@ notifyStrArr = {
     "6": "踢人",
 }
 max_number = len(positions)
+configFilePath = 'plugins/eat/config.json'
+configFileRemoteUrlKey = "eat.configFileRemoteUrl"
+
 
 
 def eat_it(base, mask, photo, number):
@@ -49,8 +54,76 @@ def eat_it(base, mask, photo, number):
     return base
 
 
+async def updateConfig(configFilePath, context):
+    configFileRemoteUrl = redis.get(configFileRemoteUrlKey)
+    if configFileRemoteUrl:
+        if downloadFileFromUrl(configFileRemoteUrl, configFilePath) != 0:
+            redis.set(configFileRemoteUrlKey, configFileRemoteUrl)
+            return -1
+        else:
+            return await loadConfigFile(configFilePath, context)
+    return 0
+
+
+def downloadFileFromUrl(url, filepath):
+    try:
+        re = get(url)
+        with open(filepath, 'wb') as ms:
+            ms.write(re.content)
+    except:
+        return -1
+    return 0
+
+
+async def loadConfigFile(configFilePath, context):
+    global positions, notifyStrArr
+    try:
+        with open(configFilePath, 'r', encoding='utf8') as cf:
+            # 读取已下载的配置文件
+            remoteConfigJson = json.load(cf)
+            # positionsStr = json.dumps(positions)
+            # positions = json.loads(positionsStr)
+
+            # 读取配置文件中的positions
+            positionsStr = json.dumps(remoteConfigJson["positions"])
+            data = json.loads(positionsStr)
+            # 与预设positions合并
+            positions = mergeDict(positions, data)
+
+            # 读取配置文件中的notifies
+            data = json.loads(json.dumps(remoteConfigJson["notifies"]))
+            # 与预设positions合并
+            notifyStrArr = mergeDict(notifyStrArr, data)
+
+            # 读取配置文件中的needDownloadFileList
+            data = json.loads(json.dumps(remoteConfigJson["needDownloadFileList"]))
+            # 下载列表中的文件
+            for fileurl in data:
+                try:
+                    fsplit = fileurl.split("/")
+                    downloadFileFromUrl(fileurl, f"plugins/eat/{fsplit[len(fsplit)-1]}")
+                except:
+                    await context.edit(f"下载文件异常，url：{fileurl}")
+                    return -1
+    except:
+        return -1
+    return 0
+
+
+def mergeDict(d1, d2):
+    dd = defaultdict(list)
+
+    for d in (d1, d2):
+        for key, value in d.items():
+            dd[key] = value
+    return dict(dd)
+
+
 @listener(is_plugin=True, outgoing=True, command=alias_command("eat"),
-          description="生成一张 吃头像 图片，（可选：当第二个参数是数字时，读取预存的配置；当第二个参数是r开头时，头像旋转180°，并且判断r后面是数字则读取对应的配置生成）",
+          description="生成一张 吃头像 图片\n"
+                      "可选：当第二个参数是数字时，读取预存的配置；"
+                      "当第二个参数是r开头时，头像旋转180°，并且判断r后面是数字则读取对应的配置生成\n"
+                      "当第二个参数是s开头时，在s后面加url则从url下载配置文件保存到本地，如果就一个s，则直接更新配置文件",
           parameters="<username/uid> [随意内容]")
 async def eat(context):
     if len(context.parameter) > 2:
@@ -98,6 +171,7 @@ async def eat(context):
         "plugins/eat/" + str(target_user.user.id) + ".jpg",
         download_big=True
     )
+
     reply_to = context.message.reply_to_msg_id
     if exists("plugins/eat/" + str(target_user.user.id) + ".jpg"):
         for num in range(1, max_number + 1):
@@ -119,11 +193,18 @@ async def eat(context):
                 if p1[0] == "r":
                     diu_round = True
                     if len(p1) > 1:
-                        p2 = int("".join(p1[1:]))
-                        number = p2
+                        try:
+                            p2 = int("".join(p1[1:]))
+                        except:
+                            # 可能也有字母的参数
+                            p2 = "".join(p1[1:])
                 elif p1[0] == "d":
                     if len(p1) > 1:
-                        p2 = int("".join(p1[1:]))
+                        try:
+                            p2 = int("".join(p1[1:]))
+                        except:
+                            # 可能也有字母的参数
+                            p2 = "".join(p1[1:])
                     if p2:
                         redis.set("eat.default-config", p2)
                         await context.edit(f"已经设置默认配置为：{p2}")
@@ -131,20 +212,64 @@ async def eat(context):
                         redis.delete("eat.default-config")
                         await context.edit(f"已经清空默认配置")
                     return
-            defaultConfig = redis.get("eat.default-config")
-            if p2 > 0:
+                elif p1[0] == "s":
+                    if len(p1) > 1:
+                        # 获取参数中的url
+                        p2 = "".join(p1[1:])
+                        if p2 == "delete":
+                            redis.delete(configFileRemoteUrlKey)
+                            await context.edit(f"已清空远程配置文件url")
+                            return
+                        # 下载文件
+                        if downloadFileFromUrl(p2, configFilePath) != 0:
+                            await context.edit(f"下载配置文件异常，请确认url是否正确")
+                            return
+                        else:
+                            # 下载成功，加载配置文件
+                            redis.set(configFileRemoteUrlKey, p2)
+                            if await loadConfigFile(configFilePath, context) != 0:
+                                await context.edit(f"加载配置文件异常，请确认从远程下载的配置文件格式是否正确")
+                                return
+                            else:
+                                await context.edit(f"下载并加载配置文件成功")
+
+                    else:
+                        # 没传url直接更新
+                        if await updateConfig(configFilePath, context) != 0:
+                            await context.edit(f"更新配置文件异常，请确认从远程下载的配置文件格式是否正确")
+                            return
+                        else:
+                            await context.edit(f"从远程更新配置文件成功")
+                    return
+            defaultConfig = redis.get("eat.default-config").decode()
+            if isinstance(p2, str):
                 number = p2
+            elif isinstance(p2, int) and p2 > 0:
+                number = int(p2)
             elif not diu_round and int(p1) > 0:
-                number = int(p1)
+                try:
+                    number = int(p1)
+                except:
+                    number = p1
             elif defaultConfig:
-                number = int(defaultConfig)
+                try:
+                    number = int(defaultConfig)
+                except:
+                    number = str(defaultConfig)
         except:
             number = randint(1, max_number)
+
+        # 加载配置
+        if exists(configFilePath):
+            if await loadConfigFile(configFilePath, context) != 0:
+                await context.edit(f"加载配置文件异常，请确认从远程下载的配置文件格式是否正确")
+                return
+
         try:
             notifyStr = notifyStrArr[str(number)]
         except:
             notifyStr = "吃头像"
-        await context.edit(f"正在生成 {notifyStr} 图片中 . . .")
+        await context.edit(f"正在生成 {notifyStr} 图片中 . . .{number}-{notifyStrArr}")
         markImg = Image.open("plugins/eat/" + str(target_user.user.id) + ".jpg")
         eatImg = Image.open("plugins/eat/eat" + str(number) + ".png")
         maskImg = Image.open("plugins/eat/mask" + str(number) + ".png")
