@@ -79,7 +79,7 @@ async def updateConfig(configFilePath, context):
             redis.set(configFileRemoteUrlKey, configFileRemoteUrl)
             return -1
         else:
-            return await loadConfigFile(configFilePath, context)
+            return await loadConfigFile(configFilePath, context, True)
     return 0
 
 
@@ -93,7 +93,7 @@ def downloadFileFromUrl(url, filepath):
     return 0
 
 
-async def loadConfigFile(configFilePath, context):
+async def loadConfigFile(configFilePath, context, forceDownload = False):
     global positions, notifyStrArr
     try:
         with open(configFilePath, 'r', encoding='utf8') as cf:
@@ -119,7 +119,10 @@ async def loadConfigFile(configFilePath, context):
             for fileurl in data:
                 try:
                     fsplit = fileurl.split("/")
-                    downloadFileFromUrl(fileurl, f"plugins/eat/{fsplit[len(fsplit)-1]}")
+                    filePath = f"plugins/eat/{fsplit[len(fsplit)-1]}"
+                    if not exists(filePath) or forceDownload:
+                        downloadFileFromUrl(fileurl, filePath)
+
                 except:
                     await context.edit(f"下载文件异常，url：{fileurl}")
                     return -1
@@ -249,7 +252,7 @@ async def eat(context):
                         else:
                             # 下载成功，加载配置文件
                             redis.set(configFileRemoteUrlKey, p2)
-                            if await loadConfigFile(configFilePath, context) != 0:
+                            if await loadConfigFile(configFilePath, context, True) != 0:
                                 await context.edit(f"加载配置文件异常，请确认从远程下载的配置文件格式是否正确")
                                 return
                             else:
