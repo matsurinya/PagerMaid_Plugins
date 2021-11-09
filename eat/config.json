@@ -1,11 +1,17 @@
 {
   "positions": {
-    "ri": [64, 87]
+    "ri": [64, 87],
+    "zou": [171, 328, "zou1"],
+    "zou1": [444, 339]
   },
   "notifies": {
-    "ri": "日一下"
+    "ri": "日一下",
+    "zou": "揍你哦"
   },
   "needDownloadFileList": [
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatzou.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskzou.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskzou1.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatri.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskri.png"
   ]
