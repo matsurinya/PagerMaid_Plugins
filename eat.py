@@ -142,7 +142,8 @@ def mergeDict(d1, d2):
           description="生成一张 吃头像 图片\n"
                       "可选：当第二个参数是数字时，读取预存的配置；"
                       "当第二个参数是r开头时，头像旋转180°，并且判断r后面是数字则读取对应的配置生成\n"
-                      "当第二个参数是s开头时，在s后面加url则从url下载配置文件保存到本地，如果就一个s，则直接更新配置文件",
+                      "当第二个参数是c开头时，在c后面加url则从url下载配置文件保存到本地，如果就一个c，则直接更新配置文件，删除则是cdelete\n"
+                      "当第二个参数是d开头时，在d后面加上模版id，即可设置默认模版-eat直接使用该模版，删除默认模版是-eat d",
           parameters="<username/uid> [随意内容]")
 async def eat(context):
     if len(context.parameter) > 2:
