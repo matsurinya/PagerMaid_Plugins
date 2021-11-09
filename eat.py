@@ -14,7 +14,6 @@ from pagermaid.utils import alias_command
 from pagermaid import redis, config
 from collections import defaultdict
 import json
-import asyncio
 
 
 try:
