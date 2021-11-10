@@ -4,6 +4,7 @@
     "ssha": [23, 338],
     "stun": [243, 56],
     "schi": [292, 201],
+    "syao": [42, 141],
     "sy": [13, 266],
     "sz": [96, 13],
     "st": [59, 220],
@@ -17,6 +18,7 @@
   "notifies": {
     "dl": "多啦打人",
     "ssha": "鲨了你",
+    "syao": "咬死你",
     "sy": "鲨鱼",
     "sz": "赞一下",
     "st": "踢你哦",
@@ -26,6 +28,8 @@
     "ada": "给爷死"
   },
   "needDownloadFileList": [
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsyao.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksyao.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatdl.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskdl.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatssha.png",
