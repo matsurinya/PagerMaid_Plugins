@@ -296,6 +296,11 @@ async def eat(context):
                     number = int(defaultConfig)
                 except:
                     number = str(defaultConfig)
+                    # 支持配置默认是倒立的头像
+                    if number.startswith("."):
+                        diu_round = True
+                        number = number[1:]
+
         except:
             number = randint(1, max_number)
 
