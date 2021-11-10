@@ -1,5 +1,6 @@
 {
   "positions": {
+    "qv": [30, 180],
     "sb": [134, 210],
     "av": [187, 71],
     "sp": [32, 186],
@@ -19,6 +20,7 @@
     "ada1": [283, 146]
   },
   "notifies": {
+    "qv": "去你的",
     "sb": "鲨抱",
     "av": "女优",
     "sp": "鲨炮",
@@ -34,6 +36,8 @@
     "ada": "给爷死"
   },
   "needDownloadFileList": [
+    "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/eatqv.png",
+    "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/maskqv.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsb.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksb.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatav.png",
