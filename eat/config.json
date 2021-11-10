@@ -1,5 +1,6 @@
 {
   "positions": {
+    "av": [187, 71],
     "sp": [32, 186],
     "dl": [39, 280],
     "ssha": [23, 338],
@@ -17,6 +18,7 @@
     "ada1": [283, 146]
   },
   "notifies": {
+    "av": "女优",
     "sp": "鲨炮",
     "dl": "多啦打人",
     "ssha": "鲨了你",
@@ -30,6 +32,8 @@
     "ada": "给爷死"
   },
   "needDownloadFileList": [
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatav.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskav.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsp.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksp.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsyao.png",
