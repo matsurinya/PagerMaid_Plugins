@@ -301,7 +301,7 @@ async def eat(context):
 
         # 加载配置
         if exists(configFilePath):
-            if await loadConfigFile(configFilePath, context) != 0:
+            if await loadConfigFile(configFilePath, context, False) != 0:
                 await context.edit(f"加载配置文件异常，请确认从远程下载的配置文件格式是否正确")
                 return
 
