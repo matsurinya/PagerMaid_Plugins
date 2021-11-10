@@ -1,5 +1,7 @@
 {
   "positions": {
+    "stun": [243, 56],
+    "schi": [292, 201],
     "sy": [14, 267],
     "sz": [97, 14],
     "st": [60, 221],
@@ -20,6 +22,10 @@
     "ada": "给爷死"
   },
   "needDownloadFileList": [
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatschi.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskschi.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatstun.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskstun.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsy.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksy.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsz.png",
