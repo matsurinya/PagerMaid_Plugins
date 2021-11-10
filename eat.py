@@ -143,9 +143,9 @@ def mergeDict(d1, d2):
 @listener(is_plugin=True, outgoing=True, command=alias_command("eat"),
           description="生成一张 吃头像 图片\n"
                       "可选：当第二个参数是数字时，读取预存的配置；\n\n"
-                      "当第二个参数是r开头时，头像旋转180°，并且判断r后面是数字则读取对应的配置生成\n\n"
-                      "当第二个参数是c开头时，在c后面加url则从url下载配置文件保存到本地，如果就一个c，则直接更新配置文件，删除则是cdelete\n\n"
-                      "当第二个参数是d开头时，在d后面加上模版id，即可设置默认模版-eat直接使用该模版，删除默认模版是-eat d",
+                      "当第二个参数是.开头时，头像旋转180°，并且判断r后面是数字则读取对应的配置生成\n\n"
+                      "当第二个参数是/开头时，在/后面加url则从url下载配置文件保存到本地，如果就一个/，则直接更新配置文件，删除则是/delete\n\n"
+                      "当第二个参数是-开头时，在d后面加上模版id，即可设置默认模版-eat直接使用该模版，删除默认模版是-eat -",
           parameters="<username/uid> [随意内容]")
 async def eat(context):
     if len(context.parameter) > 2:
@@ -214,7 +214,7 @@ async def eat(context):
             p2 = 0
             if len(context.parameter) == 1:
                 p1 = context.parameter[0]
-                if p1[0] == "r":
+                if p1[0] == ".":
                     diu_round = True
                     if len(p1) > 1:
                         try:
@@ -222,7 +222,7 @@ async def eat(context):
                         except:
                             # 可能也有字母的参数
                             p2 = "".join(p1[1:])
-                elif p1[0] == "d":
+                elif p1[0] == "-":
                     if len(p1) > 1:
                         try:
                             p2 = int("".join(p1[1:]))
@@ -236,7 +236,7 @@ async def eat(context):
                         redis.delete("eat.default-config")
                         await context.edit(f"已经清空默认配置")
                     return
-                elif p1[0] == "c":
+                elif p1[0] == "/":
                     await context.edit(f"正在更新远程配置文件")
                     if len(p1) > 1:
                         # 获取参数中的url
