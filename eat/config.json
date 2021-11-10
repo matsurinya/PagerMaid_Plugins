@@ -1,5 +1,9 @@
 {
   "positions": {
+    "sy": [14, 267],
+    "sz": [97, 14],
+    "st": [60, 221],
+    "ss": [63, 379],
     "ri": [64, 87],
     "zou": [171, 328, "zou1"],
     "zou1": [444, 339],
@@ -7,11 +11,23 @@
     "ada1": [283, 146]
   },
   "notifies": {
+    "sy": "鲨鱼",
+    "sz": "赞一下",
+    "st": "踢你哦",
+    "ss": "坑爹啊",
     "ri": "日一下",
     "zou": "揍你哦",
     "ada": "给爷死"
   },
   "needDownloadFileList": [
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsy.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksy.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsz.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksz.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatst.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskst.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatss.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskss.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatada.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskada.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskada1.png",
