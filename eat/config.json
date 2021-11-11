@@ -47,10 +47,10 @@
     "ada": "给爷死"
   },
   "needDownloadFileList": [
-    "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/eatqv.png",
-    "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/maskqv.png",
-    "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/eatxkl.png",
-    "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/maskxkl.png",
+    "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/eatqv.png",
+    "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/maskqv.png",
+    "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/eatxkl.png",
+    "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/maskxkl.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsh.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksh.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatxchi.png",
