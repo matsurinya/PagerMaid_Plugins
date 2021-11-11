@@ -1,7 +1,7 @@
 {
   "positions": {
     "sa": [239, 114],
-    "xchi": [160, 285],
+    "xchi": [164, 285],
     "qv": [30, 180],
     "sb": [134, 210],
     "av": [187, 71],
@@ -43,10 +43,10 @@
     "ada": "给爷死"
   },
   "needDownloadFileList": [
-    "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/eatxchi.png",
-    "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/maskxchi.png",
     "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/eatqv.png",
     "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/maskqv.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatxchi.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskxchi.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsa.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksa.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsb.png",
