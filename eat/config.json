@@ -1,5 +1,7 @@
 {
   "positions": {
+    "sa": [239, 114],
+    "xchi": [160, 285],
     "qv": [30, 180],
     "sb": [134, 210],
     "av": [187, 71],
@@ -7,6 +9,7 @@
     "dl": [39, 280],
     "ssha": [23, 338],
     "stun": [243, 56],
+    "stun1": [110, 84],
     "schi": [292, 201],
     "syao": [42, 141],
     "sy": [13, 266],
@@ -20,12 +23,16 @@
     "ada1": [283, 146]
   },
   "notifies": {
+    "sa": "啊～",
+    "xchi": "小熊吃饼干",
     "qv": "去你的",
     "sb": "鲨抱送葬",
     "av": "女优",
     "sp": "鲨炮",
     "dl": "多啦打人",
     "ssha": "鲨了你",
+    "stun": "嗝",
+    "stun1": "一口吞了你",
     "syao": "咬死你",
     "sy": "鲨鱼",
     "sz": "赞一下",
@@ -36,8 +43,12 @@
     "ada": "给爷死"
   },
   "needDownloadFileList": [
+    "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/eatxchi.png",
+    "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/maskxchi.png",
     "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/eatqv.png",
     "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/maskqv.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsa.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksa.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsb.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksb.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatav.png",
@@ -54,6 +65,8 @@
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskschi.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatstun.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskstun.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatstun1.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskstun1.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsy.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksy.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsz.png",
