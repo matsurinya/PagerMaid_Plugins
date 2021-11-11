@@ -1,5 +1,6 @@
 {
   "positions": {
+    "ku": [0, 0],
     "sh": [83, 274],
     "sa": [239, 114],
     "xchi": [164, 285],
@@ -24,6 +25,7 @@
     "ada1": [283, 146]
   },
   "notifies": {
+    "ku": "哭猫猫",
     "sh": "鲨画",
     "sa": "啊～",
     "xchi": "小熊吃饼干",
@@ -47,6 +49,8 @@
   "needDownloadFileList": [
     "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/eatqv.png",
     "https://raw.githubusercontent.com/Fokit/Quantumult-X/main/PagerMaid/maskqv.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatku.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskku.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsh.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksh.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatxchi.png",
