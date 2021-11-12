@@ -4,7 +4,11 @@
     "sa": [239, 114],
     "xchi": [164, 285],
     "qv": [30, 180],
+<<<<<<< Updated upstream
     "xkl": [117, 488],
+=======
+    "xkl": [110, 480],
+>>>>>>> Stashed changes
     "xda": [170, 95],
     "sb": [134, 210],
     "av": [187, 71],
@@ -51,10 +55,17 @@
   "needDownloadFileList": [
     "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/eatqv.png",
     "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/maskqv.png",
+<<<<<<< Updated upstream
     "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/eatxda.png",
     "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/maskxda.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatxkl.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskxkl.png",
+=======
+    "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/eatxkl.png",
+    "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/maskxkl.png",
+    "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/eatxda.png",
+    "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/maskxda.png",
+>>>>>>> Stashed changes
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsh.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/masksh.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatxchi.png",
