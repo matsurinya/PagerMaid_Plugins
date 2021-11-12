@@ -5,8 +5,11 @@ from os.path import exists
 from os import remove
 from requests import get
 from random import randint
+
+from telethon.events import NewMessage
 from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.types import MessageEntityMentionName
+from telethon.tl.patched import Message
+from telethon.tl.types import MessageEntityMentionName, MessageEntityPhone, MessageEntityBotCommand
 from telethon.errors.rpcerrorlist import ChatSendStickersForbiddenError
 from struct import error as StructError
 from pagermaid.listener import listener
@@ -14,7 +17,6 @@ from pagermaid.utils import alias_command
 from pagermaid import redis, config
 from collections import defaultdict
 import json
-
 
 try:
     git_source = config['git_source']
@@ -36,7 +38,7 @@ configFilePath = 'plugins/eat/config.json'
 configFileRemoteUrlKey = "eat.configFileRemoteUrl"
 
 
-async def eat_it(context, base, mask, photo, number, layer = 0):
+async def eat_it(context, from_user, base, mask, photo, number, layer=0):
     mask_size = mask.size
     photo_size = photo.size
     if mask_size[0] < photo_size[0] and mask_size[1] < photo_size[1]:
@@ -62,7 +64,7 @@ async def eat_it(context, base, mask, photo, number, layer = 0):
         except:
             await context.edit(f"图片模版加载出错，请检查并更新配置：mask{str(numberPosition[2])}.png")
             return base
-        base = await eat_it(context, base, maskImg, markImg, numberPosition[2], layer+1)
+        base = await eat_it(context, from_user, base, maskImg, markImg, numberPosition[2], layer + 1)
 
     temp = base.size[0] if base.size[0] > base.size[1] else base.size[1]
     if temp != 512:
@@ -72,14 +74,14 @@ async def eat_it(context, base, mask, photo, number, layer = 0):
     return base
 
 
-async def updateConfig(configFilePath, context):
+async def updateConfig(context):
     configFileRemoteUrl = redis.get(configFileRemoteUrlKey)
     if configFileRemoteUrl:
         if downloadFileFromUrl(configFileRemoteUrl, configFilePath) != 0:
             redis.set(configFileRemoteUrlKey, configFileRemoteUrl)
             return -1
         else:
-            return await loadConfigFile(configFilePath, context, True)
+            return await loadConfigFile(context, True)
     return 0
 
 
@@ -93,7 +95,7 @@ def downloadFileFromUrl(url, filepath):
     return 0
 
 
-async def loadConfigFile(configFilePath, context, forceDownload = False):
+async def loadConfigFile(context, forceDownload=False):
     global positions, notifyStrArr
     try:
         with open(configFilePath, 'r', encoding='utf8') as cf:
@@ -119,7 +121,7 @@ async def loadConfigFile(configFilePath, context, forceDownload = False):
             for fileurl in data:
                 try:
                     fsplit = fileurl.split("/")
-                    filePath = f"plugins/eat/{fsplit[len(fsplit)-1]}"
+                    filePath = f"plugins/eat/{fsplit[len(fsplit) - 1]}"
                     if not exists(filePath) or forceDownload:
                         downloadFileFromUrl(fileurl, filePath)
 
@@ -140,21 +142,56 @@ def mergeDict(d1, d2):
     return dict(dd)
 
 
+async def downloadFileByIds(ids, context):
+    idsStr = f',{",".join(ids)},'
+    try:
+        with open(configFilePath, 'r', encoding='utf8') as cf:
+            # 读取已下载的配置文件
+            remoteConfigJson = json.load(cf)
+            data = json.loads(json.dumps(remoteConfigJson["needDownloadFileList"]))
+            # 下载列表中的文件
+            sucSet = set()
+            failSet = set()
+            for fileurl in data:
+                try:
+                    fsplit = fileurl.split("/")
+                    fileFullName = fsplit[len(fsplit) - 1]
+                    fileName = fileFullName.split(".")[0].replace("eat", "").replace("mask", "")
+                    if f',{fileName},' in idsStr:
+                        filePath = f"plugins/eat/{fileFullName}"
+                        if downloadFileFromUrl(fileurl, filePath) == 0:
+                            sucSet.add(fileName)
+                        else:
+                            failSet.add(fileName)
+                except:
+                    failSet.add(fileName)
+                    await context.edit(f"下载文件异常，url：{fileurl}")
+            notifyStr = "更新模版完成"
+            if len(sucSet) > 0:
+                notifyStr = f'{notifyStr}\n成功模版如下：{"，".join(sucSet)}'
+            if len(failSet) > 0:
+                notifyStr = f'{notifyStr}\n失败模版如下：{"，".join(failSet)}'
+            await context.edit(notifyStr)
+    except:
+        await context.edit("更新下载模版图片失败，请确认配置文件是否正确")
+
+
+
 @listener(is_plugin=True, outgoing=True, command=alias_command("eat"),
           description="生成一张 吃头像 图片\n"
                       "可选：当第二个参数是数字时，读取预存的配置；\n\n"
                       "当第二个参数是.开头时，头像旋转180°，并且判断r后面是数字则读取对应的配置生成\n\n"
-                      "当第二个参数是/开头时，在/后面加url则从url下载配置文件保存到本地，如果就一个/，则直接更新配置文件，删除则是/delete\n\n"
+                      "当第二个参数是/开头时，在/后面加url则从url下载配置文件保存到本地，如果就一个/，则直接更新配置文件，删除则是/delete；或者/后面加模版id可以手动更新指定模版配置\n\n"
                       "当第二个参数是-开头时，在d后面加上模版id，即可设置默认模版-eat直接使用该模版，删除默认模版是-eat -\n\n"
                       "当第二个参数是!或者！开头时，列出当前可用模版",
           parameters="<username/uid> [随意内容]")
-async def eat(context):
+async def eat(context: NewMessage.Event):
+    assert isinstance(context.message, Message)
     if len(context.parameter) > 2:
         await context.edit("出错了呜呜呜 ~ 无效的参数。")
         return
     diu_round = False
     user_object = await context.client.get_me()
-    global from_user
     from_user = await context.client(GetFullUserRequest(user_object.id))
     if context.reply_to_msg_id:
         reply_message = await context.get_reply_message()
@@ -165,32 +202,43 @@ async def eat(context):
             return
         target_user = await context.client(GetFullUserRequest(user_id))
     else:
+        user_raw = ""
         if len(context.parameter) == 1 or len(context.parameter) == 2:
-            user = context.parameter[0]
+            user_raw = user = context.parameter[0]
             if user.isnumeric():
                 user = int(user)
         else:
             user = user_object.id
         if context.message.entities is not None:
             if isinstance(context.message.entities[0], MessageEntityMentionName):
-                return await context.client(GetFullUserRequest(context.message.entities[0].user_id))
-        try:
-            user_object = await context.client.get_entity(user)
-            target_user = await context.client(GetFullUserRequest(user_object.id))
-        except (TypeError, ValueError, OverflowError, StructError) as exception:
-            if str(exception).startswith("Cannot find any entity corresponding to"):
-                await context.edit("出错了呜呜呜 ~ 指定的用户不存在。")
-                return
-            if str(exception).startswith("No user has"):
-                await context.edit("出错了呜呜呜 ~ 指定的道纹不存在。")
-                return
-            if str(exception).startswith("Could not find the input entity for") or isinstance(exception, StructError):
-                await context.edit("出错了呜呜呜 ~ 无法通过此 UserID 找到对应的用户。")
-                return
-            if isinstance(exception, OverflowError):
-                await context.edit("出错了呜呜呜 ~ 指定的 UserID 已超出长度限制，您确定输对了？")
-                return
-            raise exception
+                target_user = await context.client(GetFullUserRequest(context.message.entities[0].user_id))
+            elif isinstance(context.message.entities[0], MessageEntityPhone):
+                target_user = await context.client(GetFullUserRequest(user))
+            elif isinstance(context.message.entities[0], MessageEntityBotCommand):
+                target_user = from_user
+            else:
+                return await context.edit("出错了呜呜呜 ~ 参数错误。")
+        elif user_raw[:1] in [".", "/", "-", "!"]:
+            target_user = from_user
+        else:
+            try:
+                user_object = await context.client.get_entity(user)
+                target_user = await context.client(GetFullUserRequest(user_object.id))
+            except (TypeError, ValueError, OverflowError, StructError) as exception:
+                if str(exception).startswith("Cannot find any entity corresponding to"):
+                    await context.edit("出错了呜呜呜 ~ 指定的用户不存在。")
+                    return
+                if str(exception).startswith("No user has"):
+                    await context.edit("出错了呜呜呜 ~ 指定的道纹不存在。")
+                    return
+                if str(exception).startswith("Could not find the input entity for") or isinstance(exception,
+                                                                                                  StructError):
+                    await context.edit("出错了呜呜呜 ~ 无法通过此 UserID 找到对应的用户。")
+                    return
+                if isinstance(exception, OverflowError):
+                    await context.edit("出错了呜呜呜 ~ 指定的 UserID 已超出长度限制，您确定输对了？")
+                    return
+                raise exception
     photo = await context.client.download_profile_photo(
         target_user.user.id,
         "plugins/eat/" + str(target_user.user.id) + ".jpg",
@@ -246,22 +294,47 @@ async def eat(context):
                             redis.delete(configFileRemoteUrlKey)
                             await context.edit(f"已清空远程配置文件url")
                             return
-                        # 下载文件
-                        if downloadFileFromUrl(p2, configFilePath) != 0:
-                            await context.edit(f"下载配置文件异常，请确认url是否正确")
-                            return
-                        else:
-                            # 下载成功，加载配置文件
-                            redis.set(configFileRemoteUrlKey, p2)
-                            if await loadConfigFile(configFilePath, context, True) != 0:
-                                await context.edit(f"加载配置文件异常，请确认从远程下载的配置文件格式是否正确")
+                        if p2.startswith("http"):
+                            # 下载文件
+                            if downloadFileFromUrl(p2, configFilePath) != 0:
+                                await context.edit(f"下载配置文件异常，请确认url是否正确")
                                 return
                             else:
-                                await context.edit(f"下载并加载配置文件成功")
+                                # 下载成功，加载配置文件
+                                redis.set(configFileRemoteUrlKey, p2)
+                                if await loadConfigFile(context, True) != 0:
+                                    await context.edit(f"加载配置文件异常，请确认从远程下载的配置文件格式是否正确")
+                                    return
+                                else:
+                                    await context.edit(f"下载并加载配置文件成功")
+                        else:
+                            # 根据传入模版id更新模版配置，多个用"，"或者","隔开
+                            # 判断redis是否有保存配置url
+
+                            splitStr = "，"
+                            if "," in p2:
+                                splitStr = ","
+                            ids = p2.split(splitStr)
+                            if len(ids) > 0:
+                                # 下载文件
+                                configFileRemoteUrl = redis.get(configFileRemoteUrlKey)
+                                if configFileRemoteUrl:
+                                    if downloadFileFromUrl(configFileRemoteUrl, configFilePath) != 0:
+                                        await context.edit(f"下载配置文件异常，请确认url是否正确")
+                                        return
+                                    else:
+                                        # 下载成功，更新对应配置
+                                        if await loadConfigFile(context) != 0:
+                                            await context.edit(f"加载配置文件异常，请确认从远程下载的配置文件格式是否正确")
+                                            return
+                                        else:
+                                            await downloadFileByIds(ids, context)
+                                else:
+                                    await context.edit(f"你没有订阅远程配置文件，更新个🔨")
                     else:
                         # 没传url直接更新
-                        if await updateConfig(configFilePath, context) != 0:
-                            await context.edit(f"更新配置文件异常，请确认从远程下载的配置文件格式是否正确")
+                        if await updateConfig(context) != 0:
+                            await context.edit(f"更新配置文件异常，请确认是否订阅远程配置文件，或从远程下载的配置文件格式是否正确")
                             return
                         else:
                             await context.edit(f"从远程更新配置文件成功")
@@ -269,7 +342,7 @@ async def eat(context):
                 elif p1[0] == "！" or p1[0] == "!":
                     # 加载配置
                     if exists(configFilePath):
-                        if await loadConfigFile(configFilePath, context) != 0:
+                        if await loadConfigFile(context) != 0:
                             await context.edit(f"加载配置文件异常，请确认从远程下载的配置文件格式是否正确")
                             return
                     txt = ""
@@ -311,7 +384,7 @@ async def eat(context):
 
         # 加载配置
         if exists(configFilePath):
-            if await loadConfigFile(configFilePath, context, False) != 0:
+            if await loadConfigFile(context) != 0:
                 await context.edit(f"加载配置文件异常，请确认从远程下载的配置文件格式是否正确")
                 return
 
@@ -334,7 +407,7 @@ async def eat(context):
             number = str(number)
         except:
             pass
-        result = await eat_it(context, eatImg, maskImg, markImg, number)
+        result = await eat_it(context, from_user, eatImg, maskImg, markImg, number)
         result.save('plugins/eat/eat.webp')
         target_file = await context.client.upload_file("plugins/eat/eat.webp")
         try:
