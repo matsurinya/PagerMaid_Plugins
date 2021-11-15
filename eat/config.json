@@ -1,5 +1,7 @@
 {
   "positions": {
+    "ez": [126, 303, "ez1"],
+    "ez1": [288, 92],
     "sh": [83, 274],
     "sa": [239, 114],
     "xchi": [164, 285],
@@ -26,6 +28,7 @@
     "ada1": [283, 146]
   },
   "notifies": {
+    "ez": "儿贼～",
     "sh": "鲨画",
     "sa": "啊～",
     "xchi": "小熊吃饼干",
@@ -53,6 +56,9 @@
     "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/maskqv.png",
     "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/eatko.png",
     "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/maskko.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatez.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskez.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskez1.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatxkl.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskxkl.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatsh.png",
