@@ -56,6 +56,14 @@
     "zou": "揍你哦",
     "ada": "给爷死"
   },
+  "extensionConfig": {
+    "jgg": {
+      "isSwap": true
+    },
+    "ada": {
+      "isSwap": true
+    }
+  },
   "needDownloadFileList": [
     "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/eatqv.png",
     "https://raw.githubusercontent.com/Fokit/PagerMaid_Plugins/modify/eat/maskqv.png",
