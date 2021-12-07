@@ -202,7 +202,7 @@
         },
         {
             "name": "eat",
-            "version": "1.041",
+            "version": "1.043",
             "section": "profile",
             "maintainer": "SF_PICK",
             "size": "22.3 kb",
@@ -286,19 +286,19 @@
             "section": "daily",
             "maintainer": "TNTcraftHIM",
             "size": "28.8 kb",
-            "supported": true,
+            "supported": false,
             "des-short": "网易云搜歌/随机热歌/点歌",
             "des": "可以在线搜索并且快速点歌（可回复信息点歌），也支持随机热歌功能，支持解锁VIP/灰色歌曲。命令：nem。"
         },
         {
             "name": "neteasedown",
-            "version": "1.121",
+            "version": "1.222",
             "section": "daily",
             "maintainer": "xtaodada",
-            "size": "15.6 kb",
+            "size": "11.4 kb",
             "supported": true,
             "des-short": "网易云搜歌/点歌",
-            "des": "可以在线搜索并且快速点歌（可回复信息点歌），不支持解锁VIP/灰色歌曲。命令：ned。"
+            "des": "可以在线搜索并且快速点歌，支持解锁VIP歌曲。命令：ned。"
         },
         {
             "name": "killallmembers",
@@ -502,7 +502,7 @@
         },
         {
             "name": "fuck",
-            "version": "1.022",
+            "version": "1.023",
             "section": "chat",
             "maintainer": "Pentacene",
             "size": "4.0 kb",

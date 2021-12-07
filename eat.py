@@ -15,7 +15,7 @@ from telethon.errors.rpcerrorlist import ChatSendStickersForbiddenError
 from struct import error as StructError
 from pagermaid.listener import listener
 from pagermaid.utils import alias_command
-from pagermaid import redis, config, bot
+from pagermaid import redis, config, bot, user_id
 from collections import defaultdict
 import json
 
@@ -43,6 +43,8 @@ configFileRemoteUrlKey = "eat.configFileRemoteUrl"
 async def get_full_id(object_n):
     if isinstance(object_n, Channel):
         return (await bot(GetFullChannelRequest(object_n.id))).full_chat.id  # noqa
+    elif not object_n:
+        return user_id
     return (await bot(GetFullUserRequest(object_n.id))).user.id
 
 
@@ -241,7 +243,7 @@ async def eat(context: NewMessage.Event):
             if user.isnumeric():
                 user = int(user)
         else:
-            user = user_object.id
+            user = from_user_id
         if context.message.entities is not None:
             if isinstance(context.message.entities[0], MessageEntityMentionName):
                 target_user = await context.client(GetFullUserRequest(context.message.entities[0].user_id))
