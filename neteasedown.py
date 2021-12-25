@@ -4,29 +4,24 @@ import base64
 from asyncio import sleep
 from os import sep, remove, listdir
 from os.path import isfile, exists
-from sys import executable
 from time import strftime, localtime
 
-try:
-    from mutagen.mp3 import EasyMP3
-    from mutagen.id3 import ID3, APIC
-    from mutagen.flac import FLAC, Picture
-    from mutagen.oggvorbis import OggVorbis
-    from pyncm import GetCurrentSession, apis, DumpSessionAsString, SetCurrentSession, LoadSessionFromString
-    from pyncm.utils.helper import TrackHelper
-    from pyncm.apis import LoginFailedException
-    from pyncm.apis.cloudsearch import CloudSearchType
-    from pyncm.apis.login import LoginLogout
+from pagermaid.listener import listener
+from pagermaid.utils import alias_command, execute, pip_install
 
-    cc_imported = True
-except ImportError:
-    print(f'[!] Please run {executable} -m pip install pyncm')
-    cc_imported = False
+pip_install("pyncm")
+
+from mutagen.mp3 import EasyMP3
+from mutagen.id3 import ID3, APIC
+from mutagen.flac import FLAC, Picture
+from mutagen.oggvorbis import OggVorbis
+from pyncm import GetCurrentSession, apis, DumpSessionAsString, SetCurrentSession, LoadSessionFromString
+from pyncm.utils.helper import TrackHelper
+from pyncm.apis import LoginFailedException
+from pyncm.apis.cloudsearch import CloudSearchType
+from pyncm.apis.login import LoginLogout
 
 from telethon.tl.types import DocumentAttributeAudio
-
-from pagermaid.listener import listener
-from pagermaid.utils import alias_command, execute
 
 
 def download_by_url(url, dest):
@@ -133,10 +128,6 @@ i.e.
           description=ned_help_msg,
           parameters="{关键词/id}/{login <账号> <密码>}/{clear}")
 async def ned(context):
-    if not cc_imported:
-        await context.edit(f"[!] Please run `-sh {executable} -m pip install pyncm` "
-                           f"and then restart pagermaid.")
-        return
     if len(context.parameter) < 1:
         # 使用方法
         await context.edit(ned_help_msg)
@@ -213,18 +204,18 @@ async def ned(context):
     # 搜索歌曲
     # 判断是否使用最高比特率解析
     flac_mode = True if context.arguments.find("-f") != -1 else False
-    song_id = context.arguments.replace("-f", "").strip()
+    song_id = context.arguments.replace("-f", "").replace("\u200b", "").strip()
     # id
     if song_id.isdigit():
         song_id = int(song_id)
     else:
         search_data = apis.cloudsearch.GetSearchResult(song_id, CloudSearchType(1), 1)
-        if len(search_data["result"]["songs"]) == 1:
+        if search_data.get("result", {}).get("songCount", 0) >= 1:
             song_id = search_data["result"]["songs"][0]["id"]
         else:
             await context.edit(f"**没有找到歌曲**，请检查歌曲名称是否正确。")
             return
-    # 获取歌曲信息小于等于 320k HQ
+    # 获取歌曲质量是否大于 320k HQ
     track_info = apis.track.GetTrackAudio([song_id], bitrate=3200 * 1000 if flac_mode else 320000)
     # 获取歌曲详情
     song_info = apis.track.GetTrackDetail([song_id])

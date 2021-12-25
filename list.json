@@ -11,16 +11,6 @@
             "des": "此插件用于需要自动回复的场景。"
         },
         {
-            "name": "dme",
-            "version": "1.122",
-            "section": "chat",
-            "maintainer": "xtaodada",
-            "size": "4.3 kb",
-            "supported": true,
-            "des-short": "反 TG desktop 防撤回插件。",
-            "des": "编辑并删除当前对话您发送的特定数量的消息。支持 Redis 记录上一次指定的文本，方便快速撤回消息。 最近更新：防止编辑消息报错。"
-        },
-        {
             "name": "autochangename",
             "version": "1.11",
             "section": "profile",
@@ -32,7 +22,7 @@
         },
         {
             "name": "autorm",
-            "version": "1.031",
+            "version": "1.032",
             "section": "chat",
             "maintainer": "fruitymelon",
             "size": "6.7 kb",
@@ -42,7 +32,7 @@
         },
         {
             "name": "sendat",
-            "version": "1.32",
+            "version": "1.321",
             "section": "chat",
             "maintainer": "fruitymelon",
             "size": "15.0 kb",
@@ -272,7 +262,7 @@
         },
         {
             "name": "neteaseshuffle",
-            "version": "1.111",
+            "version": "1.112",
             "section": "daily",
             "maintainer": "TNTcraftHIM",
             "size": "3.0 kb",
@@ -281,18 +271,8 @@
             "des": "从热歌榜随机获取一首歌，可以多进程同开，且附带歌曲信息。命令：ns。"
         },
         {
-            "name": "neteasemusic",
-            "version": "4.31",
-            "section": "daily",
-            "maintainer": "TNTcraftHIM",
-            "size": "28.8 kb",
-            "supported": false,
-            "des-short": "网易云搜歌/随机热歌/点歌",
-            "des": "可以在线搜索并且快速点歌（可回复信息点歌），也支持随机热歌功能，支持解锁VIP/灰色歌曲。命令：nem。"
-        },
-        {
             "name": "neteasedown",
-            "version": "1.222",
+            "version": "1.225",
             "section": "daily",
             "maintainer": "xtaodada",
             "size": "11.4 kb",
@@ -342,13 +322,13 @@
         },
         {
             "name": "vip",
-            "version": "0.62",
+            "version": "0.713",
             "section": "chat",
             "maintainer": "xtaodada",
-            "size": "9.8 kb",
+            "size": "11.6 kb",
             "supported": true,
             "des-short": "vip 捐赠用户功能",
-            "des": "命令：天气：weather weather_pic weather_he\nPixiv：pixiv \n百度：baidu Duckduckgo：duckduckgo\n相似动漫：whatanime。与 weather 插件冲突"
+            "des": "命令：天气：weather weather_pic weather_he\nPixiv：pixiv \n百度：baidu Duckduckgo：duckduckgo\n相似动漫：whatanime\n文本转语音：tts_nan tts_nv tts_tw tts_ne tts_en。与 weather 插件冲突"
         },
         {
             "name": "calculator",
@@ -452,7 +432,7 @@
         },
         {
             "name": "bc",
-            "version": "1.23",
+            "version": "1.231",
             "section": "chat",
             "maintainer": "Pentacene",
             "size": "8.0 kb",
@@ -482,7 +462,7 @@
         },
         {
             "name": "pl",
-            "version": "1.03",
+            "version": "1.031",
             "section": "chat",
             "maintainer": "lowking",
             "size": "4.0 kb",
@@ -492,7 +472,7 @@
         },
         {
             "name": "rape",
-            "version": "1.031",
+            "version": "1.033",
             "section": "chat",
             "maintainer": "Pentacene",
             "size": "4.0 kb",
@@ -532,7 +512,7 @@
         },
         {
             "name": "getstickers",
-            "version": "1.11",
+            "version": "1.111",
             "section": "chat",
             "maintainer": "xtaodada,Vesugierii",
             "size": "5.4 kb",
@@ -702,13 +682,13 @@
         },
         {
             "name": "yvlu",
-            "version": "1.121",
+            "version": "1.212",
             "section": "chat",
             "maintainer": "xtaodada",
-            "size": "4.8 kb",
+            "size": "10.4 kb",
             "supported": true,
             "des-short": "将回复的消息转换成语录图片",
-            "des": "将回复的消息转换成语录图片。\n指令：-yvlu"
+            "des": "将回复的消息或者输入字符串转换成语录图片。\n指令：-yvlu -yvlu_"
         },
         {
             "name": "antichannelmsg",
@@ -752,7 +732,7 @@
         },
         {
             "name": "autodel",
-            "version": "1.0",
+            "version": "1.001",
             "section": "chat",
             "maintainer": "xtaodada",
             "size": "5.7 kb",
@@ -793,12 +773,32 @@
         {
             "name": "epic",
             "version": "1.01",
-            "section": "chat",
+            "section": "daily",
             "maintainer": "xtaodada",
             "size": "5.80 kb",
             "supported": true,
             "des-short": "获取 Epic 喜加一信息",
             "des": "获取 Epic 喜加一信息。\n指令：-epic"
+        },
+        {
+            "name": "covid-en",
+            "version": "1.001",
+            "section": "daily",
+            "maintainer": "xtaodada",
+            "size": "1.70 kb",
+            "supported": true,
+            "des-short": "获取新冠疫情信息。（国家版）",
+            "des": "获取新冠疫情信息。（国家版）。\n指令：-covid-en"
+        },
+        {
+            "name": "moyu",
+            "version": "1.01",
+            "section": "daily",
+            "maintainer": "sam01101",
+            "size": "3.00 kb",
+            "supported": true,
+            "des-short": "获取假期剩余时间信息。",
+            "des": "获取假期剩余时间信息。\n指令：-moyu"
         }
     ]
 }

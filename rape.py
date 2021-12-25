@@ -20,10 +20,17 @@ async def rape(context):
     reply = await context.get_reply_message()
     if context.is_group:
         if reply:
-            if reply.sender.last_name is None:
-                reply_last_name = ''
-            else:
-                reply_last_name = reply.sender.last_name
+            try:
+                if reply.sender.last_name is None:
+                    reply_last_name = ''
+                else:
+                    reply_last_name = reply.sender.last_name
+            except AttributeError:
+                try:
+                    await context.edit('无法获取所回复的用户。')
+                except:
+                    pass
+                return
             if context.sender.last_name is None:
                 context_last_name = ''
             else:
@@ -38,6 +45,9 @@ async def rape(context):
                     await context.client.kick_participant(context.chat_id, reply.sender.id)
                 except ChatAdminRequiredError:
                     await context.edit('无管理员权限。')
+                    return
+                except:
+                    await context.edit('无法踢出。')
                     return
                 await context.client.send_message(
                     context.chat_id,
@@ -65,10 +75,17 @@ async def rape(context):
                 except:
                     pass
         else:
-            if context.sender.last_name is None:
-                context_last_name = ''
-            else:
-                context_last_name = context.sender.last_name
+            try:
+                if context.sender.last_name is None:
+                    context_last_name = ''
+                else:
+                    context_last_name = context.sender.last_name
+            except AttributeError:
+                try:
+                    await context.edit('无法获取所回复的用户。')
+                except:
+                    pass
+                return
             if context.arguments == '':
                 return
             else:
