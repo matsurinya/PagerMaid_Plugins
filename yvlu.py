@@ -7,9 +7,9 @@ from requests import get
 from telethon.errors import YouBlockedUserError, ForbiddenError, FloodWaitError, AuthKeyError
 from telethon.tl.functions.contacts import UnblockRequest
 from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.types import MessageMediaPhoto, MessageMediaWebPage
+from telethon.tl.types import MessageMediaPhoto, MessageMediaWebPage, MessageMediaUnsupported
 from asyncio import TimeoutError
-from pagermaid import bot
+from pagermaid import bot, version
 from pagermaid.listener import listener
 from pagermaid.utils import alias_command
 
@@ -199,8 +199,9 @@ async def yv_lu_(context):
             file_name = 'plugins/yvlu/sticker.jpg'
             await bot.download_media(reply_message.photo, file_name)
         elif isinstance(reply_message.media, MessageMediaWebPage):
-            await context.edit('不支持的文件类型。')
-            return
+            return await context.edit('不支持的文件类型。')
+        elif isinstance(reply_message.media, MessageMediaUnsupported):
+            return await context.edit('不支持的文件类型。')
         elif "image" in reply_message.media.document.mime_type.split('/'):
             file_name = 'plugins/yvlu/sticker.jpg'
             await bot.download_file(reply_message.media.document, file_name)
