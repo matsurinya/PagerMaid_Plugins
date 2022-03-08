@@ -60,7 +60,8 @@
     "daif": [225, 32],
     "jtx": [92, 214],
     "rbq": [180, 746],
-    "rrbq": [180, 746]
+    "rrbq": [180, 746],
+    "bll":[0,230]
   },
   "notifies": {
     "tui": "tuì～",
@@ -117,7 +118,8 @@
     "daif": "起飞！！大佬带飞！～",
     "jtx": "举个头像",
     "rbq": "绒布球",
-    "rrbq": "认做绒布球"
+    "rrbq": "认做绒布球",
+    "bll":"变萝莉"
   },
   "extensionConfig": {
     "jgg": {
@@ -299,6 +301,8 @@
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatrbq.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskrbq.png",
     "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatrrbq.png",
-    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskrrbq.png"
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskrrbq.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatbll.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskbll.png"
   ]
 }
