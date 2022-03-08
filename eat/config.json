@@ -57,7 +57,10 @@
     "shuy": [107, 21],
     "shuy2": [107, 21],
     "baib": [7, 269],
-    "daif": [225, 32]
+    "daif": [225, 32],
+    "jtx": [92, 214],
+    "rbq": [180, 746],
+    "rrbq": [180, 746]
   },
   "notifies": {
     "tui": "tuì～",
@@ -111,7 +114,10 @@
     "shuy": "想你的液！～",
     "shuy2": "想你的液！～",
     "baib": "拜拜大佬！～",
-    "daif": "起飞！！大佬带飞！～"
+    "daif": "起飞！！大佬带飞！～",
+    "jtx": "举个头像",
+    "rbq": "绒布球",
+    "rrbq": "认做绒布球"
   },
   "extensionConfig": {
     "jgg": {
@@ -287,6 +293,12 @@
     "https://raw.githubusercontent.com/Ldlist/PagerMaid/main/eat/maskshuy.png",
     "https://raw.githubusercontent.com/Ldlist/PagerMaid/main/eat/maskshuy2.png",
     "https://raw.githubusercontent.com/Ldlist/PagerMaid/main/eat/eatdl2.png",
-    "https://raw.githubusercontent.com/Ldlist/PagerMaid/main/eat/maskdl2.png"
+    "https://raw.githubusercontent.com/Ldlist/PagerMaid/main/eat/maskdl2.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatjtx.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskjtx.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatrbq.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskrbq.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/eatrrbq.png",
+    "https://raw.githubusercontent.com/lowking/PagerMaid_Plugins/modify/eat/maskrrbq.png"
   ]
 }
