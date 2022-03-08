@@ -62,7 +62,8 @@
     "rbq": [180, 746],
     "rrbq": [180, 746],
     "bll":[0,230],
-    "gdx":[377,241]
+    "gdx":[377,241],
+    "sese":[218,219]
   },
   "notifies": {
     "tui": "tuì～",
@@ -122,6 +123,7 @@
     "rrbq": "认做绒布球",
     "bll":"变萝莉",
     "gdx":"狗东西"
+    "sese":"不可以涩涩"
   },
   "extensionConfig": {
     "jgg": {
@@ -307,6 +309,8 @@
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatbll.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskbll.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatgdx.png",
-    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskgdx.png"
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskgdx.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatsese.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/masksese.png"
   ]
 }
