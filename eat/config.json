@@ -67,7 +67,9 @@
     "tm":[5,205],
     "chui":[-30,158],
     "huai":[100,-15],
-    "cbb":[77,60]
+    "cbb":[77,60],
+    "jc":[155,100,"jc1"],
+    "jc1":[66,370]
   },
   "notifies": {
     "tui": "tuì～",
@@ -131,7 +133,8 @@
     "tm":"舔猫",
     "chui":"锤死你",
     "huai":"一肚子坏水",
-    "cbb":"吃粑粑"
+    "cbb":"吃粑粑",
+    "jc":"警察"
   },
   "extensionConfig": {
     "jgg": {
@@ -327,6 +330,9 @@
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eathuai.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskhuai.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatcbb.png",
-    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskcbb.png"
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskcbb.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatjc.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskjc.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskjc1.png"
   ]
 }
