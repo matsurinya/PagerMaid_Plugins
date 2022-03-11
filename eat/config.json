@@ -68,7 +68,8 @@
     "chui":[-30,158],
     "huai":[100,-15],
     "cbb":[77,60],
-    "zhi":[0,0]
+    "zhi":[0,0,"zhi1"],
+    "zhi1":[0,0]
   },
   "notifies": {
     "tui": "tuì～",
@@ -331,6 +332,7 @@
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatcbb.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskcbb.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatzhi.png",
-    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskzhi.png"
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskzhi.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskzhi1.png"
   ]
 }
