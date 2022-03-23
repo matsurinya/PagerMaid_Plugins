@@ -70,7 +70,8 @@
     "cbb":[77,60],
     "zhi":[0,0,"zhi1"],
     "zhi1":[0,0],
-    "lp":[14,138]
+    "lp":[14,138],
+    "lp1":[15,130]
   },
   "notifies": {
     "tui": "tuì～",
@@ -136,7 +137,8 @@
     "huai":"一肚子坏水",
     "cbb":"吃粑粑",
     "zhi":"指一下",
-    "lp":"老婆快来"
+    "lp":"老婆快来",
+    "lp1":"老婆快来"
   },
   "extensionConfig": {
     "jgg": {
@@ -337,6 +339,8 @@
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskzhi.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskzhi1.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatlp.png",
-    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/masklp.png"
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/masklp.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatlp1.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/masklp1.png"
   ]
 }
