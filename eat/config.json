@@ -74,7 +74,8 @@
     "lp1":[15,130],
     "hu":[-25,-40],
     "jtx1":[85,269],
-    "ji":[334,60]
+    "ji":[334,60],
+    "nz":[84,-5]
   },
   "notifies": {
     "tui": "tuì～",
@@ -144,7 +145,8 @@
     "lp1":"老婆快来~",
     "hu":"虎一下",
     "jtx1":"举个头像",
-    "ji":"寄"
+    "ji":"寄",
+    "nz":"就不用脑子"
   },
   "extensionConfig": {
     "jgg": {
@@ -353,6 +355,8 @@
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatjtx1.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskjtx1.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatji.png",
-    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskji.png"
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskji.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatnz.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/masknz.png"
   ]
 }
