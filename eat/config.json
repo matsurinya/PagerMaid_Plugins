@@ -76,7 +76,8 @@
     "jtx1":[85,269],
     "ji":[334,60],
     "nz":[84,-5],
-    "jtx2":[80,70]
+    "jtx2":[80,70],
+    "tm1":[-19,202]
   },
   "notifies": {
     "tui": "tuì～",
@@ -148,7 +149,8 @@
     "jtx1":"举个头像",
     "ji":"寄",
     "nz":"就不用脑子",
-    "jtx2":"举个头像"
+    "jtx2":"举个头像",
+    "tm1":"汤姆看书"
   },
   "extensionConfig": {
     "jgg": {
@@ -361,6 +363,8 @@
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatnz.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/masknz.png",
     "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eatjtx2.png",
-    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskjtx2.png"
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/maskjtx2.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/eattm1.png",
+    "https://raw.githubusercontent.com/umr23333333/PagerMaid_Plugins/modify/eat/masktm1.png"
   ]
 }
